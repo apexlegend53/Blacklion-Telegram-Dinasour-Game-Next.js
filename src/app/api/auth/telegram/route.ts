@@ -18,7 +18,7 @@ const adminAccount = privateKeyToAccount({
   client,
 });
 
-export async function verifyTelegram(signature: string, message: string) {
+async function verifyTelegram(signature: string, message: string) {
   const metadata = JSON.parse(message);
 
   if (!metadata.expiration || metadata.expiration < Date.now()) {
