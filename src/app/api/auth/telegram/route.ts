@@ -1,7 +1,7 @@
 import { privateKeyToAccount } from "thirdweb/wallets";
 import { verifySignature } from "thirdweb/auth";
 import { NextRequest, NextResponse } from "next/server";
-import { createThirdwebClient, ThirdwebClient } from "thirdweb";
+import { createThirdwebClient } from "thirdweb";
 
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 
@@ -9,7 +9,7 @@ if (!clientId) {
   throw new Error("No client ID provided");
 }
 
-const client:any = createThirdwebClient({
+const client = createThirdwebClient({
   clientId: clientId,
 });
 
@@ -18,7 +18,7 @@ const adminAccount = privateKeyToAccount({
   client,
 });
 
-async function verifyTelegram(signature: string, message: string): Promise<any> {
+export async function verifyTelegram(signature: string, message: string) {
   const metadata = JSON.parse(message);
 
   if (!metadata.expiration || metadata.expiration < Date.now()) {
@@ -53,5 +53,5 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
-  return NextResponse.json({ "asd": "" });
+  return NextResponse.json({ userId });
 }
