@@ -8,17 +8,13 @@ export default function UnityPage() {
   useEffect(() => {
     const container = document.createElement("div");
     container.id = "unity-container";
-    container.style.display = "flex";
-    container.style.justifyContent = "center";
-    container.style.alignItems = "center";
-    container.style.height = "100vh"; // Full viewport height
     document.body.appendChild(container);
 
     const iframe = document.createElement("iframe");
     iframe.src = "/unity-webgl/index.html" + window.location.search;
     iframe.style.border = "none";
-    iframe.style.width = "1920px"; // Set width to 1920px
-    iframe.style.height = "1080px"; // Set height to 1080px
+    iframe.style.width = "100%";
+    iframe.style.height = "100vh";
     container.appendChild(iframe);
 
     return () => {
